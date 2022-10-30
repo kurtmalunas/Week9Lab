@@ -26,4 +26,10 @@ public class UserService {
         UserDB userDB = new UserDB();
         userDB.del(email);
     }
+
+    public User get(String email, List<Role> roles) throws Exception {
+        UserDB userDB = new UserDB();
+        User user = userDB.get(email, roles);
+        return user;
+    }
 }

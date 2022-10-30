@@ -24,6 +24,7 @@ public class UserServlet extends HttpServlet {
         String action = request.getParameter("action");
         UserService us = new UserService();
         RoleService rs = new RoleService();
+        session.setAttribute("Manage", "Add");
         
         if (action != null && action.equals("delete")) {
             String email = (String) request.getParameter("emailSel");
@@ -33,8 +34,36 @@ public class UserServlet extends HttpServlet {
             }
             session.setAttribute("message", "deleted " + email);
             try {
-                System.out.println();
                 us.del(email);
+                session.setAttribute("Manage", "Add");
+                session.setAttribute("email", "");
+                session.setAttribute("firstName", "");
+                session.setAttribute("lastName", "");
+                session.setAttribute("password", "");
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+                request.setAttribute("message", "Sorry. Something went wrong upon deletion");
+            }
+        }
+        
+        if (action != null && action.equals("edit")) {
+            session.setAttribute("Manage", "Edit");
+            String email = (String) request.getParameter("emailSel");
+            //cheated cuz of plus sign
+            if(email.contains("cprg352")) {
+                email = email.substring(0, 7) + "+" + email.substring(8);
+            }
+            try {
+                List<Role> roles = rs.getRoles();
+                User user = us.get(email, roles);
+                session.setAttribute("message", "went here " + user.getEmail());
+                
+                session.setAttribute("email", user.getEmail());
+                
+                session.setAttribute("firstName", user.getFirstName());
+                session.setAttribute("lastName", user.getLastName());
+                session.setAttribute("password", user.getPassword());
+                session.setAttribute("regularUser", false);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
                 request.setAttribute("message", "Sorry. Something went wrong upon deletion");

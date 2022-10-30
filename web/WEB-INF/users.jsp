@@ -31,19 +31,19 @@
                     <td>${user.firstName}</td>
                     <td>${user.lastName}</td>
                     <td>${user.getRoleName()}</td>
-                    <td>Edit</td>
+                    <td><a href="user?action=edit&amp;emailSel=${user.email}">Edit</td>
                     <td><a href="user?action=delete&amp;emailSel=${user.email}">Delete
                     </td>
                 </tr>
             </c:forEach>
         </table>
-        <h1>Add User</h1>
+        <h1>${Manage} User</h1>
         <form action="user" method="post">
-        <p>Email: <input type="text" name="email"><br>
-            First name: <input type="text" name="firstName"><br>
-            Last name:  <input type="text" name="lastName"><br>
-            Password:   <input type="text" name="password"><br>
-            Role:  <select name="regularUser">
+        <p>Email: <input type="text" name="email" value="${email}"><br>
+            First name: <input type="text" name="firstName" value="${firstName}"><br>
+            Last name:  <input type="text" name="lastName" value="${lastName}"><br>
+            Password:   <input type="text" name="password" value="${password}"><br>
+            Role:  <select name="roleOfUser" default="${roleOfUser}">
                 <option name="regularUser" value="">regular user</option><br>
                 <option name="systemAdmin" value="">system admin</option></select><br>
         </p>
