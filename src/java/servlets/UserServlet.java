@@ -20,7 +20,7 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
         
         UserService us = new UserService();
-
+        
         try {
             HttpSession session = request.getSession();
             List<User> users = us.getAll();

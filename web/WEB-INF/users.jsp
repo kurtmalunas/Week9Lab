@@ -15,6 +15,7 @@
     <body>
         <h1>Manage Users Hello</h1>
         ${UserOne}
+        ${message}
         <ul>
             <c:forEach items="${users}" var="user">
                 <li><input type="radio" name="user" value="${user}">${user}</li>
