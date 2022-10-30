@@ -10,10 +10,9 @@ import models.User;
 
 public class UserDB {
     
-    
     public List<User> getAll() throws Exception {
         RoleDB roleDB = new RoleDB();
-        ArrayList<Role> roles = null;
+        List<Role> roles = new ArrayList<>();
         roles = roleDB.getRoles();
         
         List<User> users = new ArrayList<>();

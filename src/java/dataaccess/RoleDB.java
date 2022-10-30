@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import models.Role;
 
 /**
@@ -17,8 +18,8 @@ import models.Role;
  */
 public class RoleDB {
     
-    public ArrayList<Role> getRoles() throws Exception {
-        ArrayList<Role> roles = null;
+    public List<Role> getRoles() throws Exception {
+        List<Role> roles = new ArrayList<>();
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
@@ -26,6 +27,7 @@ public class RoleDB {
         String sql = "SELECT * FROM role";
         
         try {
+            
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {

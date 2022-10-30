@@ -6,7 +6,7 @@
 package services;
 
 import dataaccess.RoleDB;
-import java.util.ArrayList;
+import java.util.List;
 import models.Role;
 
 /**
@@ -14,9 +14,9 @@ import models.Role;
  * @author kurtm
  */
 public class RoleService {
-    public ArrayList<Role> getRoles() throws Exception {
+    public List<Role> getRoles() throws Exception {
         RoleDB roleDB = new RoleDB();
-        ArrayList<Role> roles = roleDB.getRoles();
+        List<Role> roles = roleDB.getRoles();
         return roles;
     }
 }
