@@ -27,11 +27,14 @@ public class UserServlet extends HttpServlet {
         
         if (action != null && action.equals("delete")) {
             String email = (String) request.getParameter("emailSel");
-            String email2 = email.substring(0, 7) + "+" + email.substring(8);
-            session.setAttribute("message", "deleted " + email2);
+            //cheated cuz of plus sign
+            if(email.contains("cprg352")) {
+                email = email.substring(0, 7) + "+" + email.substring(8);
+            }
+            session.setAttribute("message", "deleted " + email);
             try {
                 System.out.println();
-                us.del(email2);
+                us.del(email);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
                 request.setAttribute("message", "Sorry. Something went wrong upon deletion");
