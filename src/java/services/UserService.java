@@ -7,6 +7,7 @@ package services;
 
 import dataaccess.UserDB;
 import java.util.List;
+import models.Role;
 import models.User;
 
 /**
@@ -15,9 +16,9 @@ import models.User;
  */
 public class UserService {
     
-    public List<User> getAll() throws Exception {
+    public List<User> getAll(List<Role> roles) throws Exception {
         UserDB userDB = new UserDB();
-        List<User> users = userDB.getAll();
+        List<User> users = userDB.getAll(roles);
         return users;
     }
 }

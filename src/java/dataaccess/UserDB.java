@@ -10,11 +10,8 @@ import models.User;
 
 public class UserDB {
     
-    public List<User> getAll() throws Exception {
-        RoleDB roleDB = new RoleDB();
-        List<Role> roles = new ArrayList<>();
-        roles = roleDB.getRoles();
-        
+    public List<User> getAll(List<Role> roles) throws Exception {
+
         List<User> users = new ArrayList<>();
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();

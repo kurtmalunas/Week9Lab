@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.Role;
 import models.User;
+import services.RoleService;
 import services.UserService;
 
 public class UserServlet extends HttpServlet {
@@ -20,10 +22,13 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
         
         UserService us = new UserService();
+        RoleService rs = new RoleService();
         
         try {
             HttpSession session = request.getSession();
-            List<User> users = us.getAll();
+            List<Role> roles = rs.getRoles();
+            List<User> users = us.getAll(roles);
+            
             String userOne = users.get(1).getEmail();
             request.setAttribute("UserOne", userOne);
             request.setAttribute("users", users);
