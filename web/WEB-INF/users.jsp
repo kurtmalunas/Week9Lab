@@ -16,11 +16,26 @@
         <h1>Manage Users Hello</h1>
         ${UserOne}
         ${message}
-        <ul>
+        <table border="1px, solid">
+            <tr>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+            <th>Edit User</th>
+            <th>Delete User</th>
+            </tr>
             <c:forEach items="${users}" var="user">
-                <li><input type="radio" name="user" value="${user}">${user}</li>
+                <tr>
+                    <td>${user.email}</td>
+                    <td>${user.firstName}</td>
+                    <td>${user.lastName}</td>
+                    <td>${user.getRoleName()}</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
             </c:forEach>
-        </ul>
+        </table>
         <h1>Add User</h1>
         <form action="user" method="post">
         <p>Email: <input type="text" name="email"><br>
