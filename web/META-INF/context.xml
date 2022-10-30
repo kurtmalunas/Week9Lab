@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/Week7Lab">
-    <Resource name="jdbc/notesdb" auth="Container" 
+<Context path="/">
+    <Resource name="jdbc/usersdb" auth="Container" 
         driverClassName="com.mysql.jdbc.Driver"
-        url="jdbc:mysql://localhost:3306/notesdb" 
+        url="jdbc:mysql://localhost:3306/usersdb" 
         username="root" password="password" 
         maxActive="100" maxIdle="30" maxWait="10000" 
         logAbandoned="true" removeAbandoned="true" 

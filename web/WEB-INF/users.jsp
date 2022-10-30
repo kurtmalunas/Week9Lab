@@ -15,8 +15,8 @@
     <body>
         <h1>Manage Users</h1>
         <ul>
-            <c:forEach items="${notes}" var="note">
-                <li><a href="notes?action=view&amp;noteId=${note.noteId}">${note.title}</a><br></li>
+            <c:forEach items="${users}" var="user">
+                <li><input type="radio" name="user" value="${user}">${user}</li>
             </c:forEach>
         </ul>
         <h1>Add User</h1>
@@ -32,7 +32,7 @@
         </form>
         <form action="user" method="post">
                 <input type="hidden" name="action" value="delete">
-                <input type="hidden" name="noteId" value="${selectedNote.noteId}">
+                <input type="hidden" name="noteId" value="">
                 <input type="submit" value="Delete">
         </form>
     </body>

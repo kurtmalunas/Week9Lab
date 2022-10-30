@@ -5,10 +5,18 @@
  */
 package services;
 
+import dataaccess.RoleDB;
+import java.util.ArrayList;
+import models.Role;
+
 /**
  *
  * @author kurtm
  */
 public class RoleService {
-    
+    public ArrayList<Role> getRoles() throws Exception {
+        RoleDB roleDB = new RoleDB();
+        ArrayList<Role> roles = roleDB.getRoles();
+        return roles;
+    }
 }
