@@ -24,7 +24,10 @@ public class UserServlet extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             List<User> users = us.getAll();
+            String userOne = users.get(1).getEmail();
+            request.setAttribute("UserOne", userOne);
             request.setAttribute("users", users);
+            
         } catch (Exception ex) {
             Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("message", "error");

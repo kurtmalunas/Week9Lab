@@ -13,7 +13,8 @@
         <title>Manager Users</title>
     </head>
     <body>
-        <h1>Manage Users</h1>
+        <h1>Manage Users Hello</h1>
+        ${UserOne}
         <ul>
             <c:forEach items="${users}" var="user">
                 <li><input type="radio" name="user" value="${user}">${user}</li>
@@ -26,13 +27,13 @@
             Last name:  <input type="text" name="lastName"><br>
             Password:   <input type="text" name="password"><br>
             Role:  <select name="regularUser">
-                <option name="systemAdmin" value="">regular user</option><br>
+                <option name="regularUser" value="">regular user</option><br>
                 <option name="systemAdmin" value="">system admin</option></select><br>
         </p>
         </form>
         <form action="user" method="post">
                 <input type="hidden" name="action" value="delete">
-                <input type="hidden" name="noteId" value="">
+                <input type="hidden" name="userEmail" value="">
                 <input type="submit" value="Delete">
         </form>
     </body>
