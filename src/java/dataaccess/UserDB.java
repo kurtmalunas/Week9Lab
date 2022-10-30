@@ -3,6 +3,7 @@ package dataaccess;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import models.Role;
@@ -44,6 +45,24 @@ public class UserDB {
         }
 
         return users;
+    }
+
+    public void del(String email) throws SQLException {
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        String sql = "DELETE FROM user WHERE email=?";
+        
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.executeUpdate();
+            System.out.println(email + "Works here");
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
     }
     
 }

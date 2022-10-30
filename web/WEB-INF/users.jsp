@@ -13,7 +13,7 @@
         <title>Manager Users</title>
     </head>
     <body>
-        <h1>Manage Users Hello</h1>
+        <h1>Manage Users</h1>
         ${UserOne}
         ${message}
         <table border="1px, solid">
@@ -32,7 +32,8 @@
                     <td>${user.lastName}</td>
                     <td>${user.getRoleName()}</td>
                     <td>Edit</td>
-                    <td>Delete</td>
+                    <td><a href="user?action=delete&amp;emailSel=${user.email}">Delete
+                    </td>
                 </tr>
             </c:forEach>
         </table>
@@ -46,11 +47,6 @@
                 <option name="regularUser" value="">regular user</option><br>
                 <option name="systemAdmin" value="">system admin</option></select><br>
         </p>
-        </form>
-        <form action="user" method="post">
-                <input type="hidden" name="action" value="delete">
-                <input type="hidden" name="userEmail" value="">
-                <input type="submit" value="Delete">
         </form>
     </body>
 </html>

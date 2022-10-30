@@ -21,4 +21,9 @@ public class UserService {
         List<User> users = userDB.getAll(roles);
         return users;
     }
+
+    public void del(String email) throws Exception{
+        UserDB userDB = new UserDB();
+        userDB.del(email);
+    }
 }
