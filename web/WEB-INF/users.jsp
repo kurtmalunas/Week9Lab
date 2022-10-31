@@ -39,14 +39,28 @@
         </table>
         <h1>${Manage} User</h1>
         <form action="user" method="post">
-        <p>Email: <input type="text" name="email" value="${email}"><br>
+            <p> 
+                <c:if test="${edit eq true}">
+                    Email: <input type="text" name="email" value="${email}" STYLE="background: lightgray;" readonly><br>
+                </c:if>
+                <c:if test="${edit eq false}">
+                    Email: <input type="text" name="email" value="${email}"><br>
+                </c:if>
+               
             First name: <input type="text" name="firstName" value="${firstName}"><br>
             Last name:  <input type="text" name="lastName" value="${lastName}"><br>
             Password:   <input type="text" name="password" value="${password}"><br>
-            Role:  <select name="roleOfUser" default="${roleOfUser}">
-                <option name="regularUser" value="">regular user</option><br>
-                <option name="systemAdmin" value="">system admin</option></select><br>
+            Role:  <select name="role" >
+                <c:forEach items="${roles}" var="role">
+                        <option value="${role.roleId}">${role.roleName}</option>
+                </c:forEach>
+            </select><br/>
+            
         </p>
+        </form>
+        <form action="user" method="post">
+            <input type="hidden" name="action" value="addUser">
+            <input type="submit" value="addUser">
         </form>
     </body>
 </html>

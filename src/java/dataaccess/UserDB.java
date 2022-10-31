@@ -58,7 +58,7 @@ public class UserDB {
             ps = con.prepareStatement(sql);
             ps.setString(1, email);
             ps.executeUpdate();
-            System.out.println(email + "Works here");
+
         } finally {
             DBUtil.closePreparedStatement(ps);
             cp.freeConnection(con);
