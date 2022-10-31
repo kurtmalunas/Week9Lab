@@ -112,6 +112,28 @@ public class UserDB {
             ps.setString(3, user.getPassword());
             ps.setInt(4, roleId);
             ps.setString(5, user.getEmail());
+            ps.executeUpdate();
+
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+    }
+
+    public void addUser(User user, int roleId) throws Exception {
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        String sql = "INSERT INTO user (email, first_name, last_name, password, role) " +
+                "VALUES(?,?,?,?,?)";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getFirstName());
+            ps.setString(3, user.getLastName());
+            ps.setString(4, user.getPassword());
+            ps.setInt(5, roleId);
             System.out.println(ps);
             ps.executeUpdate();
 

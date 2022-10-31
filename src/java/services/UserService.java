@@ -38,4 +38,9 @@ public class UserService {
         UserDB userDB = new UserDB();
         userDB.update(user, roleId);
     }
+
+    public void addUser(User user, int roleId) throws Exception {
+        UserDB userDB = new UserDB();
+        userDB.addUser(user, roleId);
+    }
 }

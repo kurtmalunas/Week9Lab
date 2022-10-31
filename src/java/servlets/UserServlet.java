@@ -120,24 +120,18 @@ public class UserServlet extends HttpServlet {
         
         if(action != null && action.equals("Add User")) {
                 session.setAttribute("Manage", "Add");
-                session.setAttribute(request.getParameter("action"), "addUser");
-//                String email = (String) session.getAttribute("email");
-//                String firstName = (String) session.getAttribute("firstName");
-//                String lastName = (String) session.getAttribute("lastName");
-//                String password = (String) session.getAttribute("password");
-//                String roleString = (String) session.getAttribute("role");
-//                
-//                
-//                //String vehicle = request.getParameter("vehicle");
-//                
-//                System.out.println(email);
-//            try {
-//                Role role = rs.getRole(roleString);
-//                User user = new User(email, firstName, lastName, password, role);
-//            } catch (Exception ex) {
-//                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-//                request.setAttribute("message", "Sorry. Something went wrong upon adding");
-//            }
+                int roleSel = Integer.parseInt(request.getParameter("role"));
+                try {
+                    Role role = rs.getRole(roleSel);
+                    System.out.println(email+firstName+lastName+password+roleSel);
+                    User user = new User(email, firstName, lastName, password, role);
+                    session.setAttribute("message", "Added User: " + email);
+                    us.addUser(user, roleSel);
+                } catch (Exception ex) {
+                    Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    request.setAttribute("message", "Sorry. Something went wrong upon adding");
+            } 
+                
         }
         
         if(action != null && action.equals("Update")) {

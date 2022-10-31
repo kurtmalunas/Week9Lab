@@ -40,15 +40,15 @@
         <form action="user" method="post">
             <p> 
                 <c:if test="${edit eq true}">
-                    Email: <input type="text" name="email" value="${email}" STYLE="background: lightgray;" readonly><br>
+                    Email: <input type="text" name="email" value="${email}" STYLE="background: lightgray;" readonly required><br>
                 </c:if>
                 <c:if test="${edit eq false}">
-                    Email: <input type="text" name="email" value="${email}"><br>
+                    Email: <input type="text" name="email" value="${email}" required><br>
                 </c:if>
                
-            First name: <input type="text" name="firstName" value="${firstName}"><br>
-            Last name:  <input type="text" name="lastName" value="${lastName}"><br>
-            Password:   <input type="text" name="password" value="${password}"><br>
+            First name: <input type="text" name="firstName" value="${firstName}" required><br>
+            Last name:  <input type="text" name="lastName" value="${lastName}" required><br>
+            Password:   <input type="text" name="password" value="${password}" required><br>
             Role:  <select name="role" >
                 <c:forEach items="${roles}" var="role">
                         <option value="${role.roleId}">${role.roleName}</option>
@@ -64,15 +64,15 @@
                     <input type="submit" value="Cancel" style="width:300px; display:inline;">
                 </form>
             </c:if>
-            
-            </p>
-        </form>
             <c:if test="${adding eq true}">
                 <form action="user" method="post">
                     <input type="hidden" name="action" value="Add User">
                     <input type="submit" value="Add User">
                 </form>
             </c:if>
+            </p>
+        </form>
+            
             
     </body>
 </html>
