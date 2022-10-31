@@ -156,10 +156,9 @@ public class UserServlet extends HttpServlet {
         }
         
         if(action != null && action.equals("Cancel")) {
-            request.setAttribute("email", "");
-            request.setAttribute("firstName", "");
-            request.setAttribute("lastName", "");
-            request.setAttribute("password", "");
+            session.setAttribute("Manage", "Add");
+            session.setAttribute("edit", false);
+            session.setAttribute("adding", true);
         }
         
         

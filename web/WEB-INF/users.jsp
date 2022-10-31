@@ -57,12 +57,11 @@
             <c:if test="${adding eq false}">
                 <form action="user" method="post">
                     <input type="hidden" name="action" value="Update">
-                    <input type="submit" value="Update">
+                    <input type="submit" value="Update" style="width:300px; display:inline-block;">
                 </form>
-            
                 <form action="user" method="post">
                     <input type="hidden" name="action" value="Cancel">
-                    <input type="submit" value="Cancel">
+                    <input type="submit" value="Cancel" style="width:300px; display:inline;">
                 </form>
             </c:if>
             
