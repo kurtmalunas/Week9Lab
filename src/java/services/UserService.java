@@ -32,4 +32,10 @@ public class UserService {
         User user = userDB.get(email, roles);
         return user;
     }
+
+    public void update(User user, int roleId) throws Exception {
+        
+        UserDB userDB = new UserDB();
+        userDB.update(user, roleId);
+    }
 }

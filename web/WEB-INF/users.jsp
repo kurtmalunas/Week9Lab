@@ -14,7 +14,6 @@
     </head>
     <body>
         <h1>Manage Users</h1>
-        ${UserOne}
         ${message}
         <table border="1px, solid">
             <tr>
@@ -30,7 +29,7 @@
                     <td>${user.email}</td>
                     <td>${user.firstName}</td>
                     <td>${user.lastName}</td>
-                    <td>${user.getRoleName()}</td>
+                    <td>${user.role.getRoleName()}</td>
                     <td><a href="user?action=edit&amp;emailSel=${user.email}">Edit</td>
                     <td><a href="user?action=delete&amp;emailSel=${user.email}">Delete
                     </td>
@@ -55,12 +54,26 @@
                         <option value="${role.roleId}">${role.roleName}</option>
                 </c:forEach>
             </select><br/>
+            <c:if test="${adding eq false}">
+                <form action="user" method="post">
+                    <input type="hidden" name="action" value="Update">
+                    <input type="submit" value="Update">
+                </form>
             
-        </p>
+                <form action="user" method="post">
+                    <input type="hidden" name="action" value="Cancel">
+                    <input type="submit" value="Cancel">
+                </form>
+            </c:if>
+            
+            </p>
         </form>
-        <form action="user" method="post">
-            <input type="hidden" name="action" value="addUser">
-            <input type="submit" value="addUser">
-        </form>
+            <c:if test="${adding eq true}">
+                <form action="user" method="post">
+                    <input type="hidden" name="action" value="Add User">
+                    <input type="submit" value="Add User">
+                </form>
+            </c:if>
+            
     </body>
 </html>

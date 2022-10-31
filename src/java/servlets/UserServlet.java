@@ -29,6 +29,7 @@ public class UserServlet extends HttpServlet {
         session.setAttribute("message", "Welcome");
         
         session.setAttribute("edit", false);
+        session.setAttribute("adding", true);
         if (action != null && action.equals("delete")) {
             String email = (String) request.getParameter("emailSel");
             //cheated cuz of plus sign
@@ -64,11 +65,13 @@ public class UserServlet extends HttpServlet {
             session.setAttribute("Manage", "Edit");
             session.setAttribute("message", "");
             session.setAttribute("edit", true);
+            session.setAttribute("adding", false);
             String email = (String) request.getParameter("emailSel");
             //cheated cuz of plus sign
             if(email.contains("cprg352")) {
                 email = email.substring(0, 7) + "+" + email.substring(8);
             }
+            
             try {
                 List<Role> roles = rs.getRoles();
                 List<Role> roles2 = new ArrayList<>();
@@ -77,7 +80,7 @@ public class UserServlet extends HttpServlet {
                 session.setAttribute("firstName", user.getFirstName());
                 session.setAttribute("lastName", user.getLastName());
                 session.setAttribute("password", user.getPassword());
-                
+                session.setAttribute("selectedRole", user.getRole().getRoleId());
                 for (int i = 0; i < roles.size(); i++){
                     if(i == 0){
                     for(int j = 0; j < roles.size(); j++){
@@ -108,7 +111,14 @@ public class UserServlet extends HttpServlet {
         RoleService rs = new RoleService();
         
         String action = request.getParameter("action");
-        if(action != null && action.equals("addUser")) {
+        String email = (String) request.getParameter("email");
+        String firstName = (String) request.getParameter("firstName");
+        String lastName = (String) request.getParameter("lastName");
+        String password = (String) request.getParameter("password");
+        System.out.println(action);
+        
+        
+        if(action != null && action.equals("Add User")) {
                 session.setAttribute("Manage", "Add");
                 session.setAttribute(request.getParameter("action"), "addUser");
 //                String email = (String) session.getAttribute("email");
@@ -130,6 +140,28 @@ public class UserServlet extends HttpServlet {
 //            }
         }
         
+        if(action != null && action.equals("Update")) {
+            int roleSel = Integer.parseInt(request.getParameter("role"));
+            try {
+                Role role = rs.getRole(roleSel);
+                User user = new User(email, firstName, lastName, password, role);
+                us.update(user, roleSel);
+                session.setAttribute("message", "Updated User: " + email);
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+                request.setAttribute("message", "Sorry. Something went wrong upon updating");
+            } 
+            
+            
+        }
+        
+        if(action != null && action.equals("Cancel")) {
+            request.setAttribute("email", "");
+            request.setAttribute("firstName", "");
+            request.setAttribute("lastName", "");
+            request.setAttribute("password", "");
+        }
+        
         
         try {
             List<Role> roles = rs.getRoles();
@@ -140,7 +172,13 @@ public class UserServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             request.setAttribute("message", "Sorry. Something went wrong");
+        } finally {
+            request.setAttribute("email", "");
+            request.setAttribute("firstName", "");
+            request.setAttribute("lastName", "");
+            request.setAttribute("password", "");
         }
+        
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
     }
     

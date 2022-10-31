@@ -20,9 +20,9 @@ public class RoleService {
         return roles;
     }
 
-    public Role getRole(String roleString) throws Exception {
+    public Role getRole(int roleId) throws Exception {
         RoleDB roleDB = new RoleDB();
-        Role role = roleDB.getRole(roleString);
+        Role role = roleDB.getRole(roleId);
         return role;
     }
 }

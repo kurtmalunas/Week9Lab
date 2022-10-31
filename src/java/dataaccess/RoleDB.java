@@ -43,21 +43,21 @@ public class RoleDB {
         return roles;
     }
 
-    public Role getRole(String roleString) throws Exception{
+    public Role getRole(int roleId) throws Exception{
         Role role = null;
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM role WHERE role_name=?";
-        System.out.println(roleString + "Works here");
+        
         try {
             
             ps = con.prepareStatement(sql);
-            ps.setString(1, roleString);
+            ps.setInt(1, roleId);
             rs = ps.executeQuery();
             if (rs.next()) {
-                int roleId = rs.getInt(1);
+                roleId = rs.getInt(1);
                 String roleName = rs.getString(2);
                 role = new Role(roleId, roleName);
             }
