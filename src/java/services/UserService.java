@@ -22,21 +22,27 @@ public class UserService {
         return users;
     }
 
-    public void del(String email) throws Exception{
+    public void del(User user) throws Exception{
         UserDB userDB = new UserDB();
-        userDB.del(email);
+        userDB.del(user);
     }
 
-    public User get(String email, List<Role> roles) throws Exception {
+    public User get(String email) throws Exception {
         UserDB userDB = new UserDB();
-        User user = userDB.get(email, roles);
+        User user = userDB.get(email);
         return user;
     }
 
-    public void update(User user, int roleId) throws Exception {
+    public void update(User user) throws Exception {
         
         UserDB userDB = new UserDB();
-        userDB.update(user, roleId);
+        User user2 = userDB.get(user.getEmail());
+        user2.setFirstName(user.getFirstName());
+        user2.setLastName(user.getLastName());
+        user2.setPassword(user.getPassword());
+        user2.setRole(user.getRole());
+        
+        userDB.update(user2);
     }
 
     public void addUser(User user, int roleId) throws Exception {

@@ -38,7 +38,8 @@ public class UserServlet extends HttpServlet {
             }
             session.setAttribute("message", "Deleted user: " + email);
             try {
-                us.del(email);
+                User user = us.get(email);
+                us.del(user);
                 session.setAttribute("Manage", "Add");
                 session.setAttribute("email", "");
                 session.setAttribute("firstName", "");
@@ -75,7 +76,7 @@ public class UserServlet extends HttpServlet {
             try {
                 List<Role> roles = rs.getRoles();
                 List<Role> roles2 = new ArrayList<>();
-                User user = us.get(email, roles);
+                User user = us.get(email);
                 session.setAttribute("email", user.getEmail());
                 session.setAttribute("firstName", user.getFirstName());
                 session.setAttribute("lastName", user.getLastName());
@@ -124,7 +125,8 @@ public class UserServlet extends HttpServlet {
                 try {
                     Role role = rs.getRole(roleSel);
                     System.out.println(email+firstName+lastName+password+roleSel);
-                    User user = new User(email, firstName, lastName, password, role);
+                    User user = new User(email, firstName, lastName, password);
+                    user.setRole(role);
                     session.setAttribute("message", "Added User: " + email);
                     us.addUser(user, roleSel);
                 } catch (Exception ex) {
@@ -138,8 +140,9 @@ public class UserServlet extends HttpServlet {
             int roleSel = Integer.parseInt(request.getParameter("role"));
             try {
                 Role role = rs.getRole(roleSel);
-                User user = new User(email, firstName, lastName, password, role);
-                us.update(user, roleSel);
+                User user = new User(email, firstName, lastName, password);
+                user.setRole(role);
+                us.update(user);
                 session.setAttribute("message", "Updated User: " + email);
             } catch (Exception ex) {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
